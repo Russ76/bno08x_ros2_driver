@@ -48,14 +48,11 @@ target_include_directories(bno08x_driver PUBLIC
 target_compile_features(bno08x_driver PUBLIC cxx_std_17)
 
 # Link against the local driver library and ROS 2 dependencies
-ament_target_dependencies(bno08x_driver PUBLIC
-  rclcpp
-  sensor_msgs
-  std_msgs
-)
-
 # Link against sh2 device specific library
-target_link_libraries(bno08x_driver PUBLIC
+target_link_libraries(bno08x_driver PRIVATE
+  rclcpp::rclcpp
+  ${sensor_msgs_TARGETS}
+  ${std_msgs_TARGETS}
   sh2_library
 )
 
